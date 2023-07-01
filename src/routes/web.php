@@ -16,13 +16,25 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/img/{filename}', function ($filename) {
+    $path = public_path('img/' . $filename);
+    if (file_exists($path)) {
+        return response()->file($path);
+    }
+    abort(404);
+});
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home/Index', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/home', function () {
+    return Inertia::render('Home/Index');
 });
 
 Route::get('/dashboard', function () {
@@ -35,4 +47,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
