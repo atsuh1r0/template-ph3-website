@@ -7,7 +7,7 @@ export default function Index({ auth, laravelVersion, phpVersion }) {
             <Head title="POSSE | プログラミング学習コミュニティ" />
             <div>
                 <img src={logo} />
-                <a href=" ./home ">aaaaa</a>
+                <a href=" ./user ">userページへ</a>
             </div>
         </>
     );
