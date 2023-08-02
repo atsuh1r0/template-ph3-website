@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('user/index');
+    return view('home/index');
 })->name('home');
+
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
