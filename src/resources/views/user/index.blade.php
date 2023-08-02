@@ -1,3 +1,5 @@
 <x-user-layout>
-  a
+  <div class="mt-10">
+    POSSE
+  </div>
 </x-user-layout>
