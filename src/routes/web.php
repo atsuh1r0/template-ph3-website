@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
 Route::get('/quizzes', [QuizzesController::class, 'index'])->name('quizzes.index');
+Route::get('/quizzes/{quizNum}', [QuizzesController::class, 'selectedCategory'])->name('quizzes.selectedCategory');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
