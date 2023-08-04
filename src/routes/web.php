@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuizzesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+
+Route::get('/quizzes', [QuizzesController::class, 'index'])->name('quizzes.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
