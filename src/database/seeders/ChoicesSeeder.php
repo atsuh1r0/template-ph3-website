@@ -93,5 +93,80 @@ class ChoicesSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('choices')->insert([
+            'id' => 10,
+            'question_id' => 4,
+            'text' => '東京',
+            'is_correct' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('choices')->insert([
+            'id' => 11,
+            'question_id' => 4,
+            'text' => 'ハワイ',
+            'is_correct' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('choices')->insert([
+            'id' => 12,
+            'question_id' => 4,
+            'text' => 'ロンドン',
+            'is_correct' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('choices')->insert([
+            'id' => 13,
+            'question_id' => 5,
+            'text' => '慶應義塾大学',
+            'is_correct' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('choices')->insert([
+            'id' => 14,
+            'question_id' => 5,
+            'text' => 'ハーバード大学',
+            'is_correct' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('choices')->insert([
+            'id' => 15,
+            'question_id' => 5,
+            'text' => 'トロント大学',
+            'is_correct' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('choices')->insert([
+            'id' => 16,
+            'question_id' => 6,
+            'text' => '猫',
+            'is_correct' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('choices')->insert([
+            'id' => 17,
+            'question_id' => 6,
+            'text' => '犬',
+            'is_correct' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('choices')->insert([
+            'id' => 18,
+            'question_id' => 6,
+            'text' => 'コアラ',
+            'is_correct' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

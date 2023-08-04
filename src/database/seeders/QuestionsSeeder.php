@@ -42,5 +42,34 @@ class QuestionsSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('questions')->insert([
+            'id' => 4,
+            'image' => '',
+            'text' => '出身地はどこでしょう？',
+            'supplement' => '',
+            'quiz_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('questions')->insert([
+            'id' => 5,
+            'image' => '',
+            'text' => '在籍中の大学はどこでしょう？',
+            'supplement' => '',
+            'quiz_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('questions')->insert([
+            'id' => 6,
+            'image' => '',
+            'text' => '動物に例えるとなんと言われることが多いでしょう？',
+            'supplement' => '',
+            'quiz_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

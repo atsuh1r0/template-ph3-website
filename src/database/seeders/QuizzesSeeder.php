@@ -19,5 +19,12 @@ class QuizzesSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('quizzes')->insert([
+            'id' => 2,
+            'name' => '紹介クイズ',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
