@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\QuizzesController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +21,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/delete', [UserController::class, 'delete'])->name('user.delete');
 
-Route::get('/quizzes', [QuizzesController::class, 'index'])->name('quizzes.index');
-Route::get('/quizzes/{quizNum}', [QuizzesController::class, 'selectedCategory'])->name('quizzes.selectedCategory');
+Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
+Route::get('/quizzes/{quizNum}', [QuizController::class, 'selectedCategory'])->name('quizzes.selectedCategory');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

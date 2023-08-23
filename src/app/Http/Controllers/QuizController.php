@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Questions;
+use App\Models\Question;
 use Illuminate\Http\Request;
-use App\Models\Quizzes;
+use App\Models\Quiz;
 
-class QuizzesController extends Controller
+class QuizController extends Controller
 {
     public function index()
     {
-        $quizzes = Quizzes::all();
+        $quizzes = Quiz::all();
         return view('quizzes/index', compact('quizzes'));
     }
 
@@ -19,7 +19,7 @@ class QuizzesController extends Controller
      */
     public function selectedCategory($quizNum)
     {
-        $questions = Questions::where('quiz_id', $quizNum)->get();
-        return view('quizzes/question', compact('questions'));
+        $quiz = Quiz::with('question.choice')->find($quizNum);
+        return view('quizzes/question', compact('quiz'));
     }
 }
