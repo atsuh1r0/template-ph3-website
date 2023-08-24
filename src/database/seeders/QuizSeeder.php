@@ -5,14 +5,93 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Quiz;
+use App\Models\Question;
+use App\Models\Choice;
 
-class ChoicesSeeder extends Seeder
+class QuizSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        // quizテーブルのレコードを作成
+        DB::table('quizzes')->insert([
+            'id' => 1,
+            'name' => 'ITクイズ',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('quizzes')->insert([
+            'id' => 2,
+            'name' => '紹介クイズ',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // questionテーブルのレコードを作成
+        DB::table('questions')->insert([
+            'id' => 1,
+            'image' => '',
+            'text' => '日本のIT人材が2030年には最大どれくらい不足すると言われているでしょうか？',
+            'supplement' => '',
+            'quiz_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('questions')->insert([
+            'id' => 2,
+            'image' => '',
+            'text' => '既存業界のビジネスと、先進的なテクノロジーを結びつけて生まれた、新しいビジネスのことをなんと言うでしょう？',
+            'supplement' => '',
+            'quiz_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('questions')->insert([
+            'id' => 3,
+            'image' => '',
+            'text' => 'IoTとは何の略でしょう',
+            'supplement' => '',
+            'quiz_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('questions')->insert([
+            'id' => 4,
+            'image' => '',
+            'text' => '出身地はどこでしょう？',
+            'supplement' => '',
+            'quiz_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('questions')->insert([
+            'id' => 5,
+            'image' => '',
+            'text' => '在籍中の大学はどこでしょう？',
+            'supplement' => '',
+            'quiz_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('questions')->insert([
+            'id' => 6,
+            'image' => '',
+            'text' => '動物に例えるとなんと言われることが多いでしょう？',
+            'supplement' => '',
+            'quiz_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // choiceテーブルのレコードを作成
         DB::table('choices')->insert([
             'id' => 1,
             'question_id' => 1,
@@ -168,5 +247,15 @@ class ChoicesSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        Quiz::factory()->count(20)->create()->each(function ($quiz) {
+            // 1つのクイズに対して3つのQuestionを作成
+            Question::factory()->count(3)->create(['quiz_id' => $quiz->id])->each(function ($question) {
+                // 各Questionに対して2つのis_correctが0のChoiceを作成
+                Choice::factory()->count(2)->state(['is_correct' => 0])->create(['question_id' => $question->id]);
+                // 各Questionに対して1つのis_correctが1のChoiceを作成
+                Choice::factory()->state(['is_correct' => 1])->create(['question_id' => $question->id]);
+            });
+        });
     }
 }
