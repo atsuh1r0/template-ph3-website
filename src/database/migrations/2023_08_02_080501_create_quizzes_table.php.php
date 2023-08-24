@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->comment('カテゴライズしたクイズ名 ex.) ITクイズ');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('questions', function (Blueprint $table) {
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('supplement')->nullable()->comment('設問補足');
             $table->unsignedBigInteger('quiz_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('quiz_id')->references('id')->on('quizzes');
         });
@@ -34,6 +36,7 @@ return new class extends Migration
             $table->string('text')->comment('選択肢 ex.) 約79万人');
             $table->boolean('is_correct');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('question_id')->references('id')->on('questions');
         });
