@@ -1,4 +1,9 @@
 <x-user-layout>
+  @if (session('message'))
+  <div>
+    {{ session('message') }}
+  </div>
+  @endif
   <table>
     <tr>
       <th>id</th>
@@ -20,6 +25,11 @@
         {{ $choice->text }}
       </td>
       @endforeach
+      <td>
+        <button>
+          <a href="{{ route('question.edit', $question->id) }}">編集</a>
+        </button>
+      </td>
     </tr>
     @endforeach
   </table>
