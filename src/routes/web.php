@@ -27,6 +27,7 @@ Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
 Route::get('/quizzes/{quizNum}', [QuizController::class, 'selectedCategory'])->name('quizzes.selectedCategory');
 Route::get('/quizzes/edit/{questionNum}', [QuizController::class, 'edit'])->name('question.edit');
 Route::post('/quizzes/update/', [QuizController::class, 'update'])->name('question.update');
+Route::post('/quizzes/delete/{quizNum}', [QuizController::class, 'delete'])->name('quiz.delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
