@@ -39,4 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// ログイン画面
+Route::resource('/admin', QuizController::class)->middleware(['auth', 'verified'])->name('admin', 'admin.index');
+
 require __DIR__ . '/auth.php';
