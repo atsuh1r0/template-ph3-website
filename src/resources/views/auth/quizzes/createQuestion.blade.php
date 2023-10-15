@@ -2,6 +2,9 @@
   <form method="post" action="{{ route('admin.question.store', ['quizNum' => $quizNum]) }}">
     @csrf
     設問
+    @if ($errors->has('text'))
+    <span class="text-red-500 block">{{ $errors->first('text') }}</span>
+    @endif
     <input type="text" name="text" class="block">
     選択肢①
     <input type="text" name="choice1" class="block">
