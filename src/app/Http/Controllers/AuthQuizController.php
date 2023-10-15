@@ -54,6 +54,12 @@ class AuthQuizController extends Controller
      */
     public function update(Request $request)
     {
+        // バリデーション
+        $validationRules = [
+            'text' => 'required|max:250',
+        ];
+        $request->validate($validationRules);
+
         $question = Question::find($request->question_id);
         $question->text = $request->text;
         $question->save();
@@ -117,6 +123,12 @@ class AuthQuizController extends Controller
      */
     public function storeQuiz(Request $request)
     {
+        // バリデーション
+        $validationRules = [
+            'name' => 'required|max:200',
+        ];
+        $request->validate($validationRules);
+
         $quiz = new Quiz();
         $quiz->name = $request->name;
         $quiz->save();
@@ -138,6 +150,12 @@ class AuthQuizController extends Controller
      */
     public function storeQuestion(Request $request)
     {
+        // バリデーション
+        $validationRules = [
+            'text' => 'required|max:250',
+        ];
+        $request->validate($validationRules);
+
         $question = new Question();
         $question->quiz_id = $request->quizNum;
         $question->text = $request->text;
