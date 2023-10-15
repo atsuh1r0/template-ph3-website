@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/quizzes/edit/{questionNum}', [AuthQuizController::class, 'edit'])->name('admin.question.edit');
     Route::post('/quizzes/update/', [AuthQuizController::class, 'update'])->name('admin.question.update');
     Route::post('/quizzes/delete/{quizNum}', [AuthQuizController::class, 'delete'])->name('admin.quiz.delete');
+    Route::post('/question/delete/{questionNum}', [AuthQuizController::class, 'deleteQuestion'])->name('admin.question.delete');
 });
 
 require __DIR__ . '/auth.php';

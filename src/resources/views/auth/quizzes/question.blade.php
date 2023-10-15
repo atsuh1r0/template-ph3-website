@@ -11,9 +11,11 @@
       <th>選択肢①</th>
       <th>選択肢②</th>
       <th>選択肢③</th>
+      <th>編集</th>
+      <th>削除</th>
     </tr>
     @foreach ($quiz->question as $question)
-    <tr>
+    <tr style="color: {{ $question->deleted_at ? 'gray' : 'black' }}">
       <td>
         {{ $question->id }}
       </td>
@@ -30,7 +32,15 @@
           <a href="{{ route('admin.question.edit', $question->id) }}">編集</a>
         </button>
       </td>
+      <td>
+        <form action="{{ route('admin.question.delete', $question->id) }}" method="post" id="deleteForm{{$question->id}}">
+          @csrf
+          <input type="hidden" name="quiz_id" value="{{ $question->id }}">
+          <button class="deleteQuiz">削除</button>
+        </form>
+      </td>
     </tr>
     @endforeach
   </table>
 </x-user-layout>
+<script src="{{ asset('js/quiz.js') }}"></script>

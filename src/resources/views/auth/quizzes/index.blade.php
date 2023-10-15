@@ -14,7 +14,7 @@
       <th>クイズ削除</th>
     </tr>
     @foreach ($quizzes as $quiz)
-    <tr>
+    <tr style="color: {{ $quiz->deleted_at ? 'gray' : 'black' }}">
       <td>
         {{ $quiz->id }}
       </td>

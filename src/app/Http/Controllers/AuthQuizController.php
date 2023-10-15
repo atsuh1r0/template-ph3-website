@@ -23,7 +23,7 @@ class AuthQuizController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::paginate(20);
+        $quizzes = Quiz::withTrashed()->paginate(20);
         return view('auth/quizzes/index', compact('quizzes'));
     }
 
@@ -32,7 +32,11 @@ class AuthQuizController extends Controller
      */
     public function selectedCategory($quizNum)
     {
-        $quiz = Quiz::with('question.choice')->find($quizNum);
+        $quiz = Quiz::with(['question' => function ($query) {
+            $query->with(['choice' => function ($query) {
+                $query->withTrashed(); // choiceテーブルに対してwithTrashedを適用
+            }])->withTrashed(); // questionテーブルに対してwithTrashedを適用
+        }])->withTrashed()->find($quizNum);
         return view('auth/quizzes/question', compact('quiz'));
     }
 
@@ -80,5 +84,23 @@ class AuthQuizController extends Controller
 
         session()->flash('message', '削除が完了しました');
         return redirect()->route('admin.quizzes.index');
+    }
+
+    /**
+     * 設問削除
+     */
+    public function deleteQuestion($questionId)
+    {
+        $question = Question::find($questionId);
+        $choices = Choice::where('question_id', $questionId)->get();
+        foreach ($choices as $choice) {
+            // 選択肢を削除
+            $choice->delete();
+        }
+        // 問題文を削除
+        $question->delete();
+
+        session()->flash('message', '削除が完了しました');
+        return redirect()->route('admin.quizzes.selectedCategory', ['quizNum' => $question->quiz_id]);
     }
 }
