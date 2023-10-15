@@ -248,7 +248,7 @@ class QuizSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        Quiz::factory()->count(20)->create()->each(function ($quiz) {
+        Quiz::factory()->count(50)->create()->each(function ($quiz) {
             // 1つのクイズに対して3つのQuestionを作成
             Question::factory()->count(3)->create(['quiz_id' => $quiz->id])->each(function ($question) {
                 // 各Questionに対して2つのis_correctが0のChoiceを作成

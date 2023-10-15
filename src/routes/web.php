@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\AuthQuizController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,14 +21,11 @@ Route::get('/', function () {
     return view('home/index');
 })->name('home');
 
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::get('/user/delete', [UserController::class, 'delete'])->name('user.delete');
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/users/delete', [UserController::class, 'delete'])->name('user.delete');
 
 Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
 Route::get('/quizzes/{quizNum}', [QuizController::class, 'selectedCategory'])->name('quizzes.selectedCategory');
-Route::get('/quizzes/edit/{questionNum}', [QuizController::class, 'edit'])->name('question.edit');
-Route::post('/quizzes/update/', [QuizController::class, 'update'])->name('question.update');
-Route::post('/quizzes/delete/{quizNum}', [QuizController::class, 'delete'])->name('quiz.delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -40,6 +38,16 @@ Route::middleware('auth')->group(function () {
 });
 
 // ログイン画面
-Route::resource('/admin', QuizController::class)->middleware(['auth', 'verified'])->name('admin', 'admin.index');
+// Route::resource('/admin', QuizController::class)->middleware(['auth', 'verified'])->name('admin', 'admin.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AuthQuizController::class, 'home'])->name('admin.index');
+    Route::get('/admin/quizzes', [AuthQuizController::class, 'index'])->name('admin.quizzes.index');
+    Route::get('admin/quizzes/{quizNum}', [AuthQuizController::class, 'selectedCategory'])->name('admin.quizzes.selectedCategory');
+
+
+    Route::get('/quizzes/edit/{questionNum}', [AuthQuizController::class, 'edit'])->name('admin.question.edit');
+    Route::post('/quizzes/update/', [AuthQuizController::class, 'update'])->name('admin.question.update');
+    Route::post('/quizzes/delete/{quizNum}', [AuthQuizController::class, 'delete'])->name('admin.quiz.delete');
+});
 
 require __DIR__ . '/auth.php';

@@ -25,6 +25,11 @@
         {{ $choice->text }}
       </td>
       @endforeach
+      <td>
+        <button>
+          <a href="{{ route('admin.question.edit', $question->id) }}">編集</a>
+        </button>
+      </td>
     </tr>
     @endforeach
   </table>
