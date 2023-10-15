@@ -28,7 +28,13 @@
       </td>
       @foreach ($question->choice as $choice)
       <td>
-        {{ $choice->text }}
+        <p>
+          {{ $choice->text }}
+        </p>
+        <button class="seeAnswer text-sm cursor-pointer">解答を表示</button>
+        <div class="answer hidden">
+          {{ $choice->is_correct ? '○' : '×'}}
+        </div>
       </td>
       @endforeach
       <td>
@@ -48,3 +54,4 @@
   </table>
 </x-user-layout>
 <script src="{{ asset('js/quiz.js') }}"></script>
+<script src="{{ asset('js/answer.js') }}"></script>
