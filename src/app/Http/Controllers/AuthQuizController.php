@@ -103,4 +103,67 @@ class AuthQuizController extends Controller
         session()->flash('message', '削除が完了しました');
         return redirect()->route('admin.quizzes.selectedCategory', ['quizNum' => $question->quiz_id]);
     }
+
+    /**
+     * クイズ新規作成
+     */
+    public function createQuiz()
+    {
+        return view('auth/quizzes/create');
+    }
+
+    /**
+     * クイズ新規作成完了
+     */
+    public function storeQuiz(Request $request)
+    {
+        $quiz = new Quiz();
+        $quiz->name = $request->name;
+        $quiz->save();
+
+        session()->flash('message', 'クイズ新規作成が完了しました');
+        return redirect()->route('admin.quizzes.index');
+    }
+
+    /**
+     * 設問新規作成
+     */
+    public function createQuestion($quizNum)
+    {
+        return view('auth/quizzes/createQuestion', compact('quizNum'));
+    }
+
+    /**
+     * 設問新規作成完了
+     */
+    public function storeQuestion(Request $request)
+    {
+        $question = new Question();
+        $question->quiz_id = $request->quizNum;
+        $question->text = $request->text;
+        $question->image = '';
+        $question->supplement = $request->supplement;
+        $question->save();
+
+        $choice = new Choice();
+        $choice->question_id = $question->id;
+        $choice->text = $request->choice1;
+        $choice->is_correct = $request->is_correct == 1 ? true : false;
+        $choice->save();
+
+        $choice = new Choice();
+        $choice->question_id = $question->id;
+        $choice->text = $request->choice2;
+        $choice->is_correct = $request->is_correct == 2 ? true : false;
+        $choice->save();
+
+        $choice = new Choice();
+        $choice->question_id = $question->id;
+        $choice->text = $request->choice3;
+        $choice->is_correct = $request->is_correct == 3 ? true : false;
+        $choice->save();
+
+        session()->flash('message', '設問新規作成が完了しました');
+        return redirect()->route('admin.quizzes.selectedCategory', ['quizNum' => $request->quizNum]);
+    }
 }

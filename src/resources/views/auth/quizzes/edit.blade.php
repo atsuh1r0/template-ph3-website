@@ -3,6 +3,6 @@
     @csrf
     <input type="hidden" name="question_id" value="{{ $question->id }}">
     <textarea name="text" cols="50" rows="10">{{ $question->text }}</textarea>
-    <button type="submit">編集完了</button>
+    <button class="p-4 bg-blue-200" type="submit">編集完了</button>
   </form>
 </x-user-layout>

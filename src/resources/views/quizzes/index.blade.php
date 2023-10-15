@@ -27,7 +27,7 @@
         {{ $quiz->updated_at }}
       </td>
       <td>
-        <button>
+        <button class="p-4 bg-blue-200">
           <a href="{{ route('quizzes.selectedCategory', $quiz->id) }}">選択</a>
         </button>
       </td>

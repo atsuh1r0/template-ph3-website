@@ -38,17 +38,19 @@ Route::middleware('auth')->group(function () {
 });
 
 // ログイン画面
-// Route::resource('/admin', QuizController::class)->middleware(['auth', 'verified'])->name('admin', 'admin.index');
 Route::middleware('auth')->group(function () {
+    Route::get('/admin/quizzes/edit/{questionNum}', [AuthQuizController::class, 'edit'])->name('admin.question.edit');
+    Route::post('/admin/quizzes/update/', [AuthQuizController::class, 'update'])->name('admin.question.update');
+    Route::post('/admin/quizzes/delete/{quizNum}', [AuthQuizController::class, 'delete'])->name('admin.quiz.delete');
+    Route::post('/admin/question/delete/{questionNum}', [AuthQuizController::class, 'deleteQuestion'])->name('admin.question.delete');
+    Route::get('/admin/quizzes/create/', [AuthQuizController::class, 'createQuiz'])->name('admin.quiz.create');
+    Route::post('/admin/quizzes/store/', [AuthQuizController::class, 'storeQuiz'])->name('admin.quiz.store');
+    Route::get('/admin/question/create/{quizNum}', [AuthQuizController::class, 'createQuestion'])->name('admin.question.create');
+    Route::post('/admin/question/store/', [AuthQuizController::class, 'storeQuestion'])->name('admin.question.store');
+
     Route::get('/admin', [AuthQuizController::class, 'home'])->name('admin.index');
     Route::get('/admin/quizzes', [AuthQuizController::class, 'index'])->name('admin.quizzes.index');
-    Route::get('admin/quizzes/{quizNum}', [AuthQuizController::class, 'selectedCategory'])->name('admin.quizzes.selectedCategory');
-
-
-    Route::get('/quizzes/edit/{questionNum}', [AuthQuizController::class, 'edit'])->name('admin.question.edit');
-    Route::post('/quizzes/update/', [AuthQuizController::class, 'update'])->name('admin.question.update');
-    Route::post('/quizzes/delete/{quizNum}', [AuthQuizController::class, 'delete'])->name('admin.quiz.delete');
-    Route::post('/question/delete/{questionNum}', [AuthQuizController::class, 'deleteQuestion'])->name('admin.question.delete');
+    Route::get('/admin/quizzes/{quizNum}', [AuthQuizController::class, 'selectedCategory'])->name('admin.quizzes.selectedCategory');
 });
 
 require __DIR__ . '/auth.php';

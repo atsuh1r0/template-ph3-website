@@ -4,6 +4,10 @@
     {{ session('message') }}
   </div>
   @endif
+  <h1>クイズ一覧</h1>
+  <button class="p-4 bg-blue-200">
+    <a href="{{ route('admin.quiz.create') }}">新規作成</a>
+  </button>
   <table>
     <tr>
       <th>id</th>
@@ -28,7 +32,7 @@
         {{ $quiz->updated_at }}
       </td>
       <td>
-        <button>
+        <button class="p-4 bg-blue-200">
           <a href="{{ route('admin.quizzes.selectedCategory', $quiz->id) }}">選択</a>
         </button>
       </td>
@@ -36,7 +40,7 @@
         <form action="{{ route('admin.quiz.delete', $quiz->id) }}" method="post" id="deleteForm{{$quiz->id}}">
           @csrf
           <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
-          <button class="deleteQuiz">削除</button>
+          <button class="deleteQuiz p-4 bg-blue-200">削除</button>
         </form>
       </td>
     </tr>
