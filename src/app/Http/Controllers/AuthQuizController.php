@@ -159,7 +159,7 @@ class AuthQuizController extends Controller
         $question = new Question();
         $question->quiz_id = $request->quizNum;
         $question->text = $request->text;
-        $question->image = '';
+        $question->image = $request->image;
         $question->supplement = $request->supplement;
         $question->save();
 

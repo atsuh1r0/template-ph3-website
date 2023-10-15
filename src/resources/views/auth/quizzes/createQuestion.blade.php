@@ -20,7 +20,7 @@
     </select>
 
     画像
-    <input type="text" name="image" class="block">
+    <input type="file" name="image" class="block">
     補足
     <input type="text" name="supplement" class="block">
     <button class="p-4 bg-blue-200" type="submit">設問新規作成</button>
